@@ -1,4 +1,3 @@
-import uuid
 import re
 from GUID import GuidConverter
 
@@ -174,4 +173,16 @@ if __name__ == '__main__':
     # print("Group 1: Value:  {0}; Length: {1}; Type:   {2}".format(m1.group(1), len(m1.group(1)), type(m1.group(1))))
     # print("Group 2: Value:  {0}; Length: {1}; Type:   {2}".format(m1.group(2), len(m1.group(2)), type(m1.group(2))))
     # print("Group 2: ", M1.group(2))
+    with open("./APMDZ_M526-E3_GUIDS.txt", 'r') as f:
+        lines = f.readlines()
+        for line in lines:
+            try:
+                mdz_formater = FormaterMdzGuidConverter(line)
+            except NotImplementedError:
+                continue
+            temp_string = mdz_formater.get_correct_guid_macro_name(mdz_formater.get_macro_guid_name('g'))
+            temp_string += '\N{TAB}'
+            temp_string += "0x" + GuidConverter(mdz_formater.get_guid_value()).get_guid_as_int()
+
+            print(temp_string)
 

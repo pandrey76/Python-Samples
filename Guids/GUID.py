@@ -93,7 +93,7 @@ class GuidConverter:
         if m1 is None:
             raise NotImplementedError("Error parsing string containing guid.")
         temp_string = m1[1] + m1[2] + m1[3] + m1[4] + m1[5] + m1[6] + m1[7] + m1[8] + m1[9] + m1[10] + m1[11]
-        print(temp_string)
+        # print(temp_string)
         self.__guid_groups = [
             get_correct_hex_byte_string(m1[1]),
             get_correct_hex_byte_string(m1[2]),
@@ -109,7 +109,7 @@ class GuidConverter:
         ]
 
         temp_string = self.__guid_groups[0] + self.__guid_groups[1] + self.__guid_groups[2] + self.__guid_groups[3]
-        print(temp_string)
+        # print(temp_string)
         self.__internal_uuid = uuid.UUID(temp_string)
 
     def get_guid_as_int(self):
@@ -119,9 +119,9 @@ class GuidConverter:
         """
         # converted_result = int(self.__guid_groups[0], 16)
 
-        print(int(self.__guid_groups[0], 16))
-        print(int(self.__guid_groups[1], 16))
-        print(int(self.__guid_groups[2], 16))
+        # print(int(self.__guid_groups[0], 16))
+        # print(int(self.__guid_groups[1], 16))
+        # print(int(self.__guid_groups[2], 16))
         result_pack = struct.pack('>IHH',
                                   int(self.__guid_groups[0], 16),
                                   int(self.__guid_groups[1], 16),
@@ -129,7 +129,7 @@ class GuidConverter:
 
         result_string = ""
         result_unpack = struct.unpack('IHH',  result_pack)
-        print(result_unpack)
+        # print(result_unpack)
         for i in result_unpack:
             result_string += format(i, 'x')
         result_string += self.__guid_groups[3]
