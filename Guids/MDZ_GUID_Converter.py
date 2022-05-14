@@ -1,5 +1,6 @@
 import uuid
 import re
+from GUID import GuidConverter
 
 
 class MdzGuidConverter:
@@ -81,7 +82,7 @@ class MdzGuidConverter:
         :param guid:
         :return:
         """
-        p = re.compile(r'\s*' +
+        p1 = re.compile(r'\s*' +
                        r'([a-zA-Z]+)' +
                        r'\s+=\s+' +
                        r'(' +
@@ -105,6 +106,32 @@ class MdzGuidConverter:
                        r'}' +
                        r')'
                        )
+
+        p = re.compile(r'\s*' +
+                       r'([a-zA-Z]+)' +
+                       r'\s+=\s+' +
+                       r'(' +
+                       r'{' +
+                       r'\s*0[xX][0-9a-fA-F]{8},' +
+                       r'\s*0[xX][0-9a-fA-F]{4},' +
+                       r'\s*0[xX][0-9a-fA-F]{4},' +
+                       r'\s*'
+                       r'{' +
+                       r'\s*0[xX][0-9a-fA-F][0-9a-fA-F]?,' +
+                       r'\s*0[xX][0-9a-fA-F][0-9a-fA-F]?,' +
+                       r'\s*0[xX][0-9a-fA-F][0-9a-fA-F]?,' +
+                       r'\s*0[xX][0-9a-fA-F][0-9a-fA-F]?,' +
+                       r'\s*0[xX][0-9a-fA-F][0-9a-fA-F]?,' +
+                       r'\s*0[xX][0-9a-fA-F][0-9a-fA-F]?,' +
+                       r'\s*0[xX][0-9a-fA-F][0-9a-fA-F]?,' +
+                       r'\s*0[xX][0-9a-fA-F][0-9a-fA-F]?' +
+                       r'\s*' +
+                       r'}' +
+                       r'\s*' +
+                       r'}' +
+                       r')'
+                       )
+
         m1 = p.search(guid)
         if m1 is None:
             raise NotImplementedError("Error parsing string containing guid.")
@@ -138,9 +165,11 @@ if __name__ == '__main__':
     print(guid_list)
     guid_temp = guid.get_correct_guid_macro_name(guid.get_macro_guid_name('g'))
     print(guid_temp)
-
     uuid_object = guid.get_guid_value()
     print(uuid_object)
+    guid_converter = GuidConverter(uuid_object)
+    print(guid_converter.get_guid_as_int())
+    print("c1777438c769d2118e3900a0c969723b")
     # print("Group 0: Value:  {0}; Length: {1}; Type:   {2}".format(m1.group(0), len(m1.group(0)), type(m1.group(0))))
     # print("Group 1: Value:  {0}; Length: {1}; Type:   {2}".format(m1.group(1), len(m1.group(1)), type(m1.group(1))))
     # print("Group 2: Value:  {0}; Length: {1}; Type:   {2}".format(m1.group(2), len(m1.group(2)), type(m1.group(2))))
