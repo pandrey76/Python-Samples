@@ -180,9 +180,6 @@ if __name__ == '__main__':
                 mdz_formater = FormaterMdzGuidConverter(line)
             except NotImplementedError:
                 continue
-            temp_string = mdz_formater.get_correct_guid_macro_name(mdz_formater.get_macro_guid_name('g'))
+            temp_string = "0x" + GuidConverter(mdz_formater.get_guid_value()).get_guid_as_int()
             temp_string += '\N{TAB}'
-            temp_string += "0x" + GuidConverter(mdz_formater.get_guid_value()).get_guid_as_int()
-
-            print(temp_string)
-
+            temp_string += '(' + mdz_formater.get_correct_guid_macro_name(mdz_formater.get_macro_guid_name('g')) + ')' print(temp_string)
