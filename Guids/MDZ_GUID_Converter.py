@@ -182,4 +182,5 @@ if __name__ == '__main__':
                 continue
             temp_string = "0x" + GuidConverter(mdz_formater.get_guid_value()).get_guid_as_int()
             temp_string += '\N{TAB}'
-            temp_string += '(' + mdz_formater.get_correct_guid_macro_name(mdz_formater.get_macro_guid_name('g')) + ')' print(temp_string)
+            temp_string += '(' + mdz_formater.get_correct_guid_macro_name(mdz_formater.get_macro_guid_name('g')) + ')'
+            print(temp_string)
